@@ -1,0 +1,7 @@
+click>=8.1.0
+rich>=13.0.0
+psutil>=5.9
+
+# Optional: BLAKE3 hashing (~5× faster than blake2b for large files)
+# pip install blake3
+# blake3>=0.3.0
