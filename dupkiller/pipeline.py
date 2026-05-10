@@ -195,13 +195,15 @@ class ProgressReporter:
             self._thread.join(timeout=2.0)
 
     def _run(self) -> None:
-        while not self._stop.wait(timeout=self._interval):
+        while True:
             with self._lock:
                 stats = dict(self._stats)
             if stats:
                 parts = " | ".join(f"{k}={v}" for k, v in stats.items())
                 logger.info("[PROGRESS] %s", parts)
                 console.print(f"[dim][progress] {parts}[/dim]")
+            if self._stop.wait(timeout=self._interval):
+                break
 
 
 # ---------------------------------------------------------------------------
